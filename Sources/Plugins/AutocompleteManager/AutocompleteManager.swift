@@ -275,7 +275,7 @@ open class AutocompleteManager: NSObject, InputPlugin, UITextViewDelegate, UITab
         let nsrange = NSRange(range, in: textView.text)
         
         // Replace the attributedText with a modified version
-        let autocomplete = session.completion?.text ?? ""
+        let autocomplete = delegate?.autocompleteManager(self, getSelectedText: session) ?? ""
         insertAutocomplete(autocomplete, at: session, for: nsrange)
         
         // Move Cursor to the end of the inserted text

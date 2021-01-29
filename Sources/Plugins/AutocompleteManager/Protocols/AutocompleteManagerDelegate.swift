@@ -63,6 +63,14 @@ public protocol AutocompleteManagerDelegate: AnyObject {
     ///   - text: The text to autocomplete with
     /// - Returns: If the prefix can be autocompleted. Default is TRUE
     func autocompleteManager(_ manager: AutocompleteManager, shouldComplete prefix: String, with text: String) -> Bool
+    
+    /// Returns the text to send back to the InputStackView
+    ///
+    /// - Parameters:
+    ///   - manager: The AutocompleteManager
+    ///   - session: The session
+    /// - Returns: If the prefix can be autocompleted. Default is completion text
+    func autocompleteManager(_ manager: AutocompleteManager, getSelectedText session: AutocompleteSession) -> String?
 }
 
 public extension AutocompleteManagerDelegate {
@@ -77,6 +85,10 @@ public extension AutocompleteManagerDelegate {
     
     func autocompleteManager(_ manager: AutocompleteManager, shouldComplete prefix: String, with text: String) -> Bool {
         return true
+    }
+    
+    func autocompleteManager(_ manager: AutocompleteManager, getSelectedText session: AutocompleteSession) -> String? {
+        return session.completion?.text
     }
 }
 
